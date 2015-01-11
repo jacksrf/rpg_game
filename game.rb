@@ -12,12 +12,14 @@ $bulbasaur = {name: "Bulbasaur", attack1: "Tackle", attack2: "growl", attack3: "
 $charmander= {name: "Charmander", attack1: "growl", attack2: "scratch", attack3: "Inferno", health: 39, attack_power: 52, defense: 43}
 $squirtle = {name: "Squirtle", attack1: "Tackle", attack2: "Tail Whip", attack3: "Hydro Pump", health: 44, attack_power: 48, defense: 65}
 
-$zubat = {attack1: "", attack2: "", attack3: "", health: 100}
-$mankey = {attack1: "", attack2: "", attack3: "", health: 100}
-$jigglypuff = {attack1: "", attack2: "", attack3: "", health: 100}
+$enemyPool1 =[{name: "Caterpie", attack1: "String Shot", attack2: "Tackle", attack3: "Bug Bite", health: 45, attack_power: 30, defense: 35},
+ {name: "Metapod", attack1: "Harden", attack2: "Harden", attack3: "Harden", health: 50, attack_power: 20, defense: 55},
+ {name: "Butterfree", attack1: "Confusion", attack2: "Poison Powder", attack3: "Quiver Dance", health: 60, attack_power: 45, defense: 50}]
+
 
 def battle()
-  puts "Whats your first attack? Choose (#{$current_pokemon[0][:attack1]}, #{$current_pokemon[0]['attack2']}, #{$current_pokemon[0]['attack3']})"
+  puts "POKEMON: you are battleing #{$current_enemy[0][:name]}, its HP is #{$current_enemy[0][:health]}, Attack Power is #{$current_enemy[0][:attack_power]}, and Defense Power is #{$current_enemy[0][:defense]}".colorize(:red)
+  puts "Whats your first attack? Choose (#{$current_pokemon[0][:attack1]}, #{$current_pokemon[0][:attack2]}, #{$current_pokemon[0][:attack3]})".colorize(:red)
 
 end
 
@@ -36,11 +38,12 @@ end
 
 puts "Professor Oak: 'Hello #{player_name}. Do you and #{$current_pokemon[0][:name]} wish to catch them all? (y/n)'".colorize(:white)
 
+i = rand(3)
+$current_enemy.push($enemyPool1[i-1])
+
 
 if gets.chomp.downcase == "y"
-
- puts "A wild Zubat has appeared! Do you wish to fight? (y/n)".colorize(:white)
-$current_pokemon.push($zubat)
+  puts "A wild #{$current_enemy[0][:name]} has appeared! Do you wish to fight? (y/n)".colorize(:white)
  if gets.chomp.downcase == "y"
    battle()
  else
